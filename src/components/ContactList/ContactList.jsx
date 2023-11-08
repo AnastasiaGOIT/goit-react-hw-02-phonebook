@@ -1,5 +1,3 @@
-import css from './ContactList.module.css';
-
 export const ContactList = ({ props, deleteContact }) => {
   return (
     <ul>
