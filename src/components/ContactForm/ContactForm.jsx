@@ -16,13 +16,10 @@ export class ContactForm extends Component {
     let { contacts } = this.props;
     const name = this.state.name;
     const number = this.state.number;
-    const isExist = contacts.some(contact => contact.name === name);
-    if (isExist) {
-      alert(`${name} is already in contacts.`);
-      return;
-    }
+    this.props.isExist(name);
     this.props.addContact(name, number);
   };
+
   render() {
     return (
       <form className={css.container} onSubmit={this.handleSubmit}>

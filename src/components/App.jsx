@@ -20,6 +20,14 @@ export class App extends Component {
   createContact = data => {
     console.log(data);
   };
+  isExist = name => {
+    const isExist = this.state.contacts.some(contact => contact.name === name);
+    if (isExist) {
+      alert(`${name} is already in contacts.`);
+      return;
+    }
+  };
+
   addContact = (name, number) => {
     const contact = {
       id: nanoid(),
@@ -55,6 +63,7 @@ export class App extends Component {
           onInputChange={this.onInputChange}
           contacts={this.state.contacts}
           addContact={this.addContact}
+          isExist={this.isExist}
         />
         <h3>Contacts</h3>
         <Filter value={this.state.filter} onChange={this.onInputChange} />
