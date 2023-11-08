@@ -67,10 +67,10 @@ export class App extends Component {
       >
         <h1>Phonebook</h1>
         <ContactForm
-          onInputChange={this.onInputChange}
-          contacts={this.state.contacts}
+          // onInputChange={this.onInputChange}
+          // contacts={this.state.contacts}
           addContact={this.addContact}
-          isExist={this.isExist}
+          // isExist={this.isExist}
         />
         <h3>Contacts</h3>
         <Filter value={this.state.filter} onChange={this.onInputChange} />
