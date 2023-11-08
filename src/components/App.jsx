@@ -8,8 +8,9 @@ export class App extends Component {
   state = {
     contacts: [],
     filter: '',
-    name: '',
-    number: '',
+  };
+  onInputChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
   };
   deleteContact = contactId => {
     this.setState(prevState => ({
@@ -18,19 +19,6 @@ export class App extends Component {
   };
   createContact = data => {
     console.log(data);
-  };
-  onInputChange = ({ target }) => {
-    this.setState({ [target.name]: target.value });
-  };
-  // onNumberChange = e => {
-  //   this.setState({ number: e.currentTarget.value });
-  // };
-  handleSubmit = e => {
-    e.preventDefault();
-
-    const name = this.state.name;
-    const number = this.state.number;
-    this.addContact(name, number);
   };
   addContact = (name, number) => {
     const contact = {
@@ -45,7 +33,6 @@ export class App extends Component {
     }));
     console.log(contact);
   };
-
   render() {
     let normalized = this.state.filter.toLowerCase();
     let visibleList = this.state.contacts.filter(contact =>
@@ -65,29 +52,13 @@ export class App extends Component {
       >
         <h1>Phonebook</h1>
         <ContactForm
-          handleSubmit={this.handleSubmit}
           onInputChange={this.onInputChange}
-          valueName={this.state.name}
-          valueNumber={this.state.number}
+          contacts={this.state.contacts}
+          addContact={this.addContact}
         />
         <h3>Contacts</h3>
         <Filter value={this.state.filter} onChange={this.onInputChange} />
-
-        {/* <ContactList props={this.visibleList} /> */}
-        <ul>
-          {visibleList.map(contact => (
-            <li key={contact.id}>
-              {contact.name}:{contact.number}
-              <button
-                className="form__delete"
-                type="text"
-                onClick={() => this.deleteContact(contact.id)}
-              >
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
+        <ContactList props={visibleList} deleteContact={this.deleteContact} />
       </div>
     );
   }
