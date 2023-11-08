@@ -13,11 +13,8 @@ export class ContactForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    let { contacts } = this.props;
-    const name = this.state.name;
-    const number = this.state.number;
-    this.props.isExist(name);
-    this.props.addContact(name, number);
+    this.props.addContact(this.state);
+    this.setState({ name: '', number: '' });
   };
 
   render() {
